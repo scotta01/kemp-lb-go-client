@@ -2,7 +2,6 @@ package commands
 
 import (
 	"bytes"
-	"crypto/tls"
 	"net/http"
 )
 
@@ -25,25 +24,4 @@ func (c *baseCommand) httpRequest(method, url string, payload []byte, client HTT
 // HTTPClient interface abstracts the HTTP client
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
-}
-
-// CustomHTTPClient wraps the standard http.Client
-type CustomHTTPClient struct {
-	client *http.Client
-}
-
-// NewCustomHTTPClient creates a new instance of CustomHTTPClient
-func NewCustomHTTPClient(insecureSkipVerify bool) *CustomHTTPClient {
-	return &CustomHTTPClient{
-		client: &http.Client{
-			Transport: &http.Transport{
-				TLSClientConfig: &tls.Config{InsecureSkipVerify: insecureSkipVerify},
-			},
-		},
-	}
-}
-
-// Do send an HTTP request and returns an HTTP response
-func (c *CustomHTTPClient) Do(req *http.Request) (*http.Response, error) {
-	return c.client.Do(req)
 }

@@ -51,18 +51,19 @@ Initialize the client and use its methods to interact with your Kemp Load Balanc
 package main
 
 import (
-    "github.com/scotta01-org/kemp-lb-go-client/pkg/client"
+	"fmt"
+	"github.com/scotta01-org/kemp-lb-go-client/pkg/client"
 )
 
 func main() {
-    kempClient := client.NewKempClient("your-kemp-address", "your-api-key", true)
-    
-    // List virtual services
-    virtualServices, err := kempClient.ListVirtualServices()
-    if err != nil {
-        log.Fatal(err)
-    }
-    fmt.Println(virtualServices)
+	kempClient := client.NewKempClient("your-kemp-address", "your-api-key", true)
+
+	// List virtual services
+	virtualServices, err := kempClient.ListVirtualServices()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("%+v\n",virtualServices)
 }
 ```
 ## Contributing
